@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "1021662720609",
+    "project_id": "datosmartes-22bb7",
+    "storage_bucket": "datosmartes-22bb7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021662720609:android:e761932c3f3fd0e7e33020",
+        "android_client_info": {
+          "package_name": "com.lupitech.codigomartes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1021662720609-5312irugovjkvjkna9qmnnif3epe8agq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqJjgTAIn8Ql9Aj1uft7A3f9layk1-Qvs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1021662720609-5312irugovjkvjkna9qmnnif3epe8agq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1021662720609-1soe7bcnhn0latr032968d48n6su106b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lupitech.codigomartes"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021662720609:android:7da8ebf741999125e33020",
+        "android_client_info": {
+          "package_name": "com.lupitech.codigomartes2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1021662720609-fogueqq4l0ecemouuq4c1fpcr3s1pb4g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lupitech.codigomartes2",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "1021662720609-5312irugovjkvjkna9qmnnif3epe8agq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqJjgTAIn8Ql9Aj1uft7A3f9layk1-Qvs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1021662720609-5312irugovjkvjkna9qmnnif3epe8agq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1021662720609-1soe7bcnhn0latr032968d48n6su106b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lupitech.codigomartes"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
