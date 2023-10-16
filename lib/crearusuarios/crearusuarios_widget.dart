@@ -2,32 +2,33 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/custom_functions.dart' as functions;
+import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'home_model.dart';
-export 'home_model.dart';
+import 'crearusuarios_model.dart';
+export 'crearusuarios_model.dart';
 
-class HomeWidget extends StatefulWidget {
-  const HomeWidget({Key? key}) : super(key: key);
+class CrearusuariosWidget extends StatefulWidget {
+  const CrearusuariosWidget({Key? key}) : super(key: key);
 
   @override
-  _HomeWidgetState createState() => _HomeWidgetState();
+  _CrearusuariosWidgetState createState() => _CrearusuariosWidgetState();
 }
 
-class _HomeWidgetState extends State<HomeWidget> {
-  late HomeModel _model;
+class _CrearusuariosWidgetState extends State<CrearusuariosWidget> {
+  late CrearusuariosModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => HomeModel());
+    _model = createModel(context, () => CrearusuariosModel());
 
-    _model.txtNum1Controller ??= TextEditingController(text: '0');
-    _model.txtNum2Controller ??= TextEditingController(text: '0');
+    _model.txtEmailCUController ??= TextEditingController();
+    _model.txtPasswordCUController ??= TextEditingController();
   }
 
   @override
@@ -60,19 +61,16 @@ class _HomeWidgetState extends State<HomeWidget> {
               size: 30.0,
             ),
             onPressed: () async {
-              context.pushNamed('login1');
+              context.pushNamed('Home');
             },
           ),
-          title: Align(
-            alignment: AlignmentDirectional(0.00, 0.00),
-            child: Text(
-              'Sumar Dos Números',
-              style: FlutterFlowTheme.of(context).headlineMedium.override(
-                    fontFamily: 'Outfit',
-                    color: Colors.white,
-                    fontSize: 22.0,
-                  ),
-            ),
+          title: Text(
+            'Registrar Usuarios',
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: 'Outfit',
+                  color: Colors.white,
+                  fontSize: 22.0,
+                ),
           ),
           actions: [],
           centerTitle: true,
@@ -93,17 +91,50 @@ class _HomeWidgetState extends State<HomeWidget> {
                         padding:
                             EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                         child: TextFormField(
-                          controller: _model.txtNum1Controller,
+                          controller: _model.txtEmailCUController,
+                          onFieldSubmitted: (_) async {
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: Text(_model.txtEmailCUController.text),
+                                  content: Text('Usuario Creado Exitosamente'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: Text('Ok'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Usuario Creado Exitosamente',
+                                  style: TextStyle(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                  ),
+                                ),
+                                duration: Duration(milliseconds: 4000),
+                                backgroundColor:
+                                    FlutterFlowTheme.of(context).secondary,
+                              ),
+                            );
+                          },
                           autofocus: true,
                           obscureText: false,
                           decoration: InputDecoration(
-                            labelText: 'Número 1',
+                            labelText: 'Usuario',
                             labelStyle:
                                 FlutterFlowTheme.of(context).labelMedium,
                             hintStyle: FlutterFlowTheme.of(context).labelMedium,
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).accent2,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
                                 width: 2.0,
                               ),
                               borderRadius: BorderRadius.circular(8.0),
@@ -131,7 +162,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                             ),
                           ),
                           style: FlutterFlowTheme.of(context).bodyMedium,
-                          validator: _model.txtNum1ControllerValidator
+                          validator: _model.txtEmailCUControllerValidator
                               .asValidator(context),
                         ),
                       ),
@@ -149,17 +180,18 @@ class _HomeWidgetState extends State<HomeWidget> {
                         padding:
                             EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                         child: TextFormField(
-                          controller: _model.txtNum2Controller,
+                          controller: _model.txtPasswordCUController,
                           autofocus: true,
-                          obscureText: false,
+                          obscureText: !_model.txtPasswordCUVisibility,
                           decoration: InputDecoration(
-                            labelText: 'Número 2',
+                            labelText: 'Contraseña',
                             labelStyle:
                                 FlutterFlowTheme.of(context).labelMedium,
                             hintStyle: FlutterFlowTheme.of(context).labelMedium,
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).accent2,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
                                 width: 2.0,
                               ),
                               borderRadius: BorderRadius.circular(8.0),
@@ -185,9 +217,22 @@ class _HomeWidgetState extends State<HomeWidget> {
                               ),
                               borderRadius: BorderRadius.circular(8.0),
                             ),
+                            suffixIcon: InkWell(
+                              onTap: () => setState(
+                                () => _model.txtPasswordCUVisibility =
+                                    !_model.txtPasswordCUVisibility,
+                              ),
+                              focusNode: FocusNode(skipTraversal: true),
+                              child: Icon(
+                                _model.txtPasswordCUVisibility
+                                    ? Icons.visibility_outlined
+                                    : Icons.visibility_off_outlined,
+                                size: 22,
+                              ),
+                            ),
                           ),
                           style: FlutterFlowTheme.of(context).bodyMedium,
-                          validator: _model.txtNum2ControllerValidator
+                          validator: _model.txtPasswordCUControllerValidator
                               .asValidator(context),
                         ),
                       ),
@@ -199,38 +244,27 @@ class _HomeWidgetState extends State<HomeWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(15.0, 15.0, 15.0, 15.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Text(
-                      'Total:  ',
-                      style: FlutterFlowTheme.of(context).bodyMedium,
-                    ),
-                    Text(
-                      functions
-                          .sumar(_model.txtNum1Controller.text,
-                              _model.txtNum2Controller.text)
-                          .toString(),
-                      style: FlutterFlowTheme.of(context).bodyMedium,
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(15.0, 15.0, 15.0, 15.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     FFButtonWidget(
                       onPressed: () async {
+                        await actions.createUser(
+                          _model.txtEmailCUController.text,
+                          _model.txtPasswordCUController.text,
+                          random_data.randomString(
+                            10,
+                            25,
+                            true,
+                            true,
+                            true,
+                          ),
+                        );
                         await showDialog(
                           context: context,
                           builder: (alertDialogContext) {
                             return AlertDialog(
-                              title: Text('El total es:'),
-                              content: Text(functions
-                                  .sumar(_model.txtNum1Controller.text,
-                                      _model.txtNum2Controller.text)
-                                  .toString()),
+                              title: Text(_model.txtEmailCUController.text),
+                              content: Text('Usuario Creado Exitosamente'),
                               actions: [
                                 TextButton(
                                   onPressed: () =>
@@ -242,41 +276,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                           },
                         );
                       },
-                      text: 'Calcular',
-                      options: FFButtonOptions(
-                        height: 40.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Readex Pro',
-                                  color: Colors.white,
-                                ),
-                        elevation: 3.0,
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(15.0, 15.0, 15.0, 15.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    FFButtonWidget(
-                      onPressed: () async {
-                        context.pushNamed('crearusuarios');
-                      },
-                      text: 'Registrar Usuarios',
+                      text: 'Crear Usuario',
                       options: FFButtonOptions(
                         height: 40.0,
                         padding: EdgeInsetsDirectional.fromSTEB(

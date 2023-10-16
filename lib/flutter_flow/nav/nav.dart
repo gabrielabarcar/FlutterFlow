@@ -101,6 +101,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'login1',
           path: '/login1',
           builder: (context, params) => Login1Widget(),
+        ),
+        FFRoute(
+          name: 'crearusuarios',
+          path: '/crearusuarios',
+          builder: (context, params) => CrearusuariosWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
